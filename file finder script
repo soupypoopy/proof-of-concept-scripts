@@ -1,0 +1,74 @@
+#!/bin/bash
+
+filename="none"
+dirname="none"
+
+until [[ "$exit" = 0 ]]; do
+        clear
+        cat <<- _end_
+
+        hello this script will find files go nuts
+
+        1.search for file
+        2.reset dir and file
+
+        3.select filename
+        4.select directory
+
+        0.exit
+
+                _end_
+
+        echo "the current file search selected is  $filename"
+        echo "the current directory selected is    $dirname"
+        echo
+        read -p "pick a option from 0-3: " exit
+        echo
+        if [[ "$exit" = 0 ]]; then
+                        echo "hi and goodby"
+                        sleep 3
+                        break
+
+        elif [[ "$exit" = 1 ]]; then
+                if [[ "$filename" = "none" ]] || [[ "$dirname" = "none" ]]; then
+                        echo
+                        echo "sorry the directory and file fields are not filled in!"
+                        read -p "enter to continue"
+                else
+                        echo "ok i will search"
+                        echo "please wait"
+                        sleep 3
+                        echo
+                        find $dirname -type f -name $filename
+                        echo
+                        read -p "enter to continue"
+                fi
+
+        elif [[ "$exit" = 2 ]]; then
+                echo "ok i will reset"
+                unset dirname
+                unset filename
+                filename="none"
+                dirname="none"
+                read -p "enter to continue"
+
+
+        elif [[ "$exit" = 3 ]]; then
+                read -p "sup pick a name of a file you want to look for: " filename
+                echo "cool $filename is selected "
+                read -p "enter to continue"
+
+
+        elif [[ "$exit" = 4 ]]; then
+                read -p "sup pick a name of a directory you want to search in : " dirname
+                echo "cool $dirname is selected "
+                read -p "enter to continue"
+
+        else
+                clear
+                echo "you didnt say the mangic word!!!"
+                sleep 3
+        fi
+done
+
+echo "all done"
