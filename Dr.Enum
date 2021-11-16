@@ -1,0 +1,191 @@
+
+#!/bin/bash
+
+<<DISCRIP
+NAME: drectory enmation script
+AUTH: Matteo A, Liberatore
+DESC: looks at the drectory and gathers information
+DATE: 11/4/2021
+DISCRIP
+
+#
+#a pre-set configuration for the selected directory
+Selected_directory="None"
+
+#
+#a while loop of the main menu with a few extra thingys
+while [ "$EXIT" != 0 ]; do
+        clear
+        echo "hello user"
+        whoami
+        echo
+        cat <<- _END_
+ _________                       ________
+||by  M.L||                 ____||DOCTOR||
+||vr. 0.1||                ||Enumeration||
+ =========                  =============
+
+
+
+ =========================================
+||what would you like to enumerate today!||
+ =========================================
+
+
+
+OPTIONS
+=========================
+1. Select the direcotory||
+2. reset the direcotory ||
+3. reset log file       ||
+=============================================================
+4. Count all directorys inside the directory                ||
+5. show all the directory paths within the directory        ||
+6. show all the directories information within the directory||
+======================================================================
+7. take all the information above from 4-6 and place it in a log file||
+======================================================================
+0. exit||
+========
+        _END_
+        echo
+        echo "The Current Selected directory is: $Selected_directory"
+        echo "please remember to enter the full filepath please!"
+        echo
+
+#
+#this is asking the user witch option they would like to choose
+        read -p "please Select a option from [0-7]: " EXIT
+
+#
+#option 1 will ask the user to give a input for the directory they would like to search
+        if [[ "$EXIT" == 1 ]]; then
+                read -p "What Directory do you want to search?: " Selected_directory
+                echo "Directory has bin set to $Selected_directory"
+                read -p "press ENTER to continue"
+
+#
+#this will ask the user if he whats to reset the currnt selected drectory back to none
+        elif [[ "$EXIT" == 2 ]]; then
+                read -p "would you reset the current selected directory [y/n] " yorn
+                if [[ "$yorn" == "y" ]]; then
+                        echo "ok it is now reset"
+                        unset Selected_directory
+                        Selected_directory="None"
+                        read -p "press ENTER to continue"
+
+                elif [[ "$yorn" == "n" ]]; then
+                        echo "ok then leave"
+                        read -p "press ENTER to continue"
+
+                else
+                        echo "how hard is it to enter y or n"
+                        read -p "press ENTER to continue"
+                fi
+
+#
+#this will ask the user if he wants to reset the log file
+        elif [[ "$EXIT" == 3 ]]; then
+                read -p "would you reset the directory log file [y/n] " yorn
+                if [[ "$yorn" == "y" ]]; then
+                        echo "" > directory_Log_file.txt
+                        read -p "press ENTER to continue"
+
+                elif [[ "$yorn" == "n" ]]; then
+                        echo "ok then leave"
+                        read -p "press ENTER to continue"
+
+                else
+                        echo "how hard is it to enter y or n"
+                        read -p "press ENTER to continue"
+                fi
+
+#
+#this will count all the directories for the user
+        elif [[ "$EXIT" == 4 ]]; then
+                echo
+                echo "NUMBER OF DIRECTORIES"
+                echo "======================================================================"
+                echo "The Number of Directories that are Avalible are..."
+                ls -lR "$Selected_directory" | grep '/' | wc -l
+                echo "======================================================================"
+                echo
+                read -p "press ENTER to continue"
+
+#
+#this will show all the avalible directories and there paths to the user
+        elif [[ "$EXIT" == 5 ]]; then
+                echo
+                echo "AVALIBLE DIRECTORIES AND THERE PATHS"
+                echo "======================================================================"
+                ls -lR "$Selected_directory" | grep '/'
+                echo "======================================================================"
+                echo
+                read -p "press ENTER to continue"
+
+#
+#this will show all the the drectories information to the user
+        elif [[ "$EXIT" == 6 ]]; then
+                echo
+                echo "AVALIBLE DIRECTORIES AND THERE INFOMATION"
+                echo "======================================================================"
+                ls -lR "$Selected_directory" | grep '^d'
+                echo "======================================================================"
+                echo
+                read -p "press ENTER to continue"
+
+#
+#this will log all the options from 4-6 and place it into a file
+        elif [[ "$EXIT" == 7 ]]; then
+                read -p "are you sure you would like to put it into a log file [y/n] " yorn2
+                if [[ "$yorn2" == "y" ]]; then
+                        {
+                        echo "======================================================================"
+                        date
+                        echo "======================================================================"
+                        echo " _________                       ________ "
+                        echo "||by  M.L||                 ____||DOCTOR||"
+                        echo "||vr. 0.1||                ||Enumeration||"
+                        echo " =========                  ============= "
+                        echo
+                        echo "======================================================================"
+                        echo "NUMBER OF DIRECTORIES"
+                        echo "======================================================================"
+                        echo "The Number of Directories that are Avalible are..."
+                        ls -lR "$Selected_directory" | grep '/' | wc -l
+                        echo "======================================================================"
+                        echo "AVALIBLE DIRECTORIES AND THERE PATHS"
+                        echo "======================================================================"
+                        ls -lR "$Selected_directory" | grep '/'
+                        echo "======================================================================"
+                        echo "AVALIBLE DIRECTORIES AND THERE INFOMATION"
+                        echo "======================================================================"
+                        ls -lR "$Selected_directory" | grep '^d'
+                        echo "======================================================================"
+                        echo "######################################################################"
+                        echo "######################################################################"
+                        echo "######################################################################"
+                        }>> directory_Log_file.txt
+                        read -p "press ENTER to continue"
+
+                elif [[ "$yorn2" == "n" ]]; then
+                        read -p "press ENTER to continue"
+
+                else
+                        echo "how hard is it to enter y or n"
+                        read -p "press ENTER to continue"
+                fi
+
+#
+#this will exit the script and say bye bye
+        elif [[ "$EXIT" == 0 ]]; then
+                echo "bye bye come back soon"
+                sleep 2
+#
+#if no options a selected then it will say sorrwey
+        else
+                echo "sorrwey not a option"
+                sleep 2
+        fi
+done
+clear
