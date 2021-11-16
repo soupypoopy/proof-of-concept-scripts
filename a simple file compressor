@@ -1,0 +1,20 @@
+#!bin/bash
+
+echo
+echo "hello this script will compress or uncompress files"
+read -p "what would you like to do today [co/un]: " choice
+        if [[ "$choice" == "co" ]]; then
+                echo
+                echo "plz enter full filepath or just the name of what is ever in the compresser directory"
+                read -p "what is the file or directory you want to compress: " path
+                read -p "what name would you like to give the compressed object: " name
+                tar -cf "$name".tar "$path"
+                echo "thank you plz come again"
+                read -p "enter to continue"
+
+        elif [[ "$choice" = "un" ]]; then
+                echo "plz enter name"
+                read -p "what is the file or directory you want to uncompress within the scripts directory compresser : " name2
+                tar -xf "$name2".tar
+
+        fi
