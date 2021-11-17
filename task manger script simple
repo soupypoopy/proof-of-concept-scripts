@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 until [[ "$memorcpu" = "mem" ]] || [[ "$memorcpu" = "cpu" ]]; do
 	clear
 	read -p "hello what prosess would you like to see memory or CUP usege (mem/cpu) " memorcpu
