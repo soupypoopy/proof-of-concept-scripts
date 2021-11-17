@@ -1,0 +1,120 @@
+#!/bin/bash
+
+<<DIS
+AUTH: Matteo A, Liberatore
+DESC: a script that will give sudo permissions to a user or somthing
+DATA: 11/16/2021
+DIS
+
+#
+#i made a untill for the menu untill exit = 0
+until [[ "$EXIT" = 0 ]]; do
+	clear
+	cat <<-_end1_
+
+hello guy how would you like to modify today.
+
+
+1.put user into sudo group
+2.take user out of sudo
+3.add a new user in the system
+4.remove a user in the system
+5.set password for users
+6.change shell for users
+
+0.exit
+
+	_end1_
+
+read -p "hi please select a option from [0-6]: " EXIT
+echo
+
+#
+# if 1 is selected it will place any userinto the sudo group
+	if [[ "$EXIT" = 1 ]]; then
+		read -p "what user would you like to add to the sudo group: " username1
+		usermod -aG sudo "$username1"
+		echo "all done"
+		read -p "enter to continue"
+
+#
+# 2 will take move any user out of the sudo group
+	elif [[ "$EXIT" = 2 ]]; then
+		read -p "ok what is the user you wish to reamove from the sudo's groups: " username2
+		gpasswd -d "$username2" sudo
+		echo "all done"
+                read -p "enter to continue"
+
+#
+# 3 will create a new user with a home directory, shell and password
+	elif [[ "$EXIT" = 3 ]]; then
+		read -p "ok what is the name you would like to give to the user: " username3
+		useradd -m "$username3"
+		read -p "new users should have a new shell would you like to set a new shell for the user [y/n]: " yesorno
+		if [[ "$yesorno" = "y" ]]; then
+			echo "ok what would you like to set it to: "
+			echo
+			cat /etc/shells
+			echo
+			echo "please select one!"
+			chsh "$username3"
+			echo "ok!"
+			read -p "enter to continue"
+		elif [[ "$yesorno" = "n" ]]; then
+			echo "ok then"
+			read -p "enter to continue"
+		else
+			read -p "how hard is it to enter yes or no"
+		fi
+		echo
+		read -p "would you also like to set a password [y/n]: " yesorno2
+		if [[ "$yesorno2" = "y" ]]; then
+			passwd "$username3"
+			echo "ok all done"
+		elif [[ "$yesorno" = "n" ]]; then
+			read -p "enter to continue"
+		else
+			read -p "how hard is it to enter yes or no"
+		fi
+		echo "have a good day"
+		sleep 2
+
+#
+# 4 will simply remove a user
+	elif [[ "$EXIT" = 4 ]]; then
+		read -p "ok what user would you like to remove : " username4
+		userdel -r "$username4"
+		echo "ok all done"
+		read -p "enter to continue"
+
+#
+# 5 will simply make a password for a user
+	elif [[ "$EXIT" = 5 ]]; then
+		read -p "what user would you like to give a password: " usr5
+		passwd "$usr5"
+		echo "have a good day"
+		read -p "enter to continue"
+
+#
+# 6 will simple ask for a shell to give to a user
+	elif [[ "$EXIT" = 6 ]]; then
+		read -p "hello whats the user you would like to set a shell for: " username6
+		chsh "$username6"
+		echo "have a good day"
+                read -p "enter to continue"
+
+#
+# 0 will exit the script
+	elif [[ "$EXIT" = 0 ]]; then
+		echo "ok bye bye"
+		sleep 2
+
+#
+# if nothing is chosen then it will reference jrassic park
+	else
+		echo "sorry you didnt say the magic word!!!"
+		sleep 2
+	fi
+#
+# all done
+done
