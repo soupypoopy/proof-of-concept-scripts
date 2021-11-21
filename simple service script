@@ -1,0 +1,41 @@
+#!/bin/bash
+
+until [[ "$EXIT" = 0 ]]; do
+        clear
+        cat <<-_END1_
+
+hello this script will do things
+
+1.install tor
+2.unstall tor
+
+3.turn on tor
+4.turn off tor
+
+5.status of tor
+
+0.exit
+
+        _END1_
+
+read -p "please enter one of the options below [0-5]: " EXIT
+        if [[ "$EXIT" = 1 ]]; then
+                apt-get install tor
+                read -p "enter to continue"
+        elif [[ "$EXIT" = 2 ]]; then
+                apt-get remove tor
+                read -p "enter to continue"
+        elif [[ "$EXIT" = 3 ]]; then
+                systemctl start tor
+                read -p "enter to continue"
+        elif [[ "$EXIT" = 4 ]]; then
+                systemctl stop tor
+                read -p "enter to continue"
+        elif [[ "$EXIT" = 5 ]]; then
+                systemctl status tor
+                read -p "enter to continue"
+        else
+                echo "ah ah ah didnt say the magic WORD!!!"
+                sleep 2
+        fi
+done
