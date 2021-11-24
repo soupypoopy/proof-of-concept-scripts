@@ -1,0 +1,42 @@
+#!/bin/bash
+
+until [[ "$EXIT" = 0 ]]; do
+        clear
+        cat << endlol
+hello this script is a mini text editor thing i dont know
+
+
+1.make and write to a text file
+2.append to a text file
+3.show text from a file
+
+0.exit
+
+endlol
+
+read -p " alright select a option [0-3]: " EXIT
+        if [[ "$EXIT" = 1 ]]; then
+                clear
+                read -p " ok what would you like to name this text file: " filename
+                echo "clt D to exit you may now write what you would like"
+                cat > "$filename.txt"
+        elif [[ "$EXIT" = 2 ]]; then
+                read -p "ok what text file would you like to append: " filename2
+                clear
+                echo "clt D to exit you may now write what you would like"
+                cat >> "$filename2.txt"
+        elif [[ "$EXIT" = 3 ]]; then
+                read -p " ok what is the name of the text file you would like to see: " FN3
+                echo "$FN3.txt"
+                cat "$FN3.txt"
+                read -p "enter to continue" EXIT2
+        elif [[ "$EXIT" = 0 ]]; then
+                echo ""
+                echo "ah ah ah you didnt say the magic WORD jk get out of here!!!"
+                sleep 2
+        else
+                echo ""
+                echo "ah ah ah you didnt say the magic WORD!!!"
+                sleep 2
+        fi
+done
