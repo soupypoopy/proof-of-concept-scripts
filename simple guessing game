@@ -1,0 +1,37 @@
+#!/bin/bash
+
+#out of a 100
+magicnumber=42
+guess=0 #dont change
+maxtrys=10
+trys=0 #dont change
+
+until [ $guess = $magicnumber ]; do
+        clear
+        echo "your Guess:     $guess"
+        echo "alloud trys:      $maxtrys"
+        echo "your trys:        $trys"
+        echo
+        if [ $trys = $maxtrys ]; then
+                echo "sorry your out of trys and the magic number was $magicnumber"
+                read -p "you falled enter to continue"
+                break
+        fi
+        read -p "hello try and guess the number out of a hundo: " guess
+
+        if [ $guess = $magicnumber ]; then
+                echo "congrates you got the right number it was $magicnumber"
+                read -p "enter to continue"
+
+        elif [ $trys != $maxtrys ]; then
+                if [ $guess -gt $magicnumber ]; then
+                        trys=$(( trys + 1 ))
+                        echo "sorry your guess is a little to high try again"
+                        read -p "enter to continue"
+                elif [ $guess -lt $magicnumber ]; then
+                        trys=$(( trys + 1 ))
+                        echo "sorry your guess is a little to down try again"
+                        read -p "enter to continue"
+                fi
+        fi
+done
