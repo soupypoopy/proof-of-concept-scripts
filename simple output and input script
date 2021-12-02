@@ -18,7 +18,7 @@ for object in $#; do
 done
 
 
-} 1>/home/mliberatore/Documents/$name.txt 2>/var/log/ERROR.txt
+} 1>/home/!name_of_users_home_dir_please_change!/Documents/$name.txt 2>/var/log/ERROR.txt
 
 echo "all done"
 echo "any file made will be stored in the Documents dir"
