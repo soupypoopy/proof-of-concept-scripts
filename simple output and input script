@@ -1,0 +1,25 @@
+!/bin/bash
+
+echo
+echo "hello you have entered a total of $# objects"
+echo "and they are listed below"
+echo $@
+echo
+
+echo "this will all be outputed to a file"
+read -p "what is the name of the file: " name
+
+{
+for object in $#; do
+        echo "======================================================"
+        date
+        ls -la $@
+        echo "======================================================"
+done
+
+
+} 1>/home/mliberatore/Documents/$name.txt 2>/var/log/ERROR.txt
+
+echo "all done"
+echo "any file made will be stored in the Documents dir"
+echo "any errors will be stored in the logs file dir"
