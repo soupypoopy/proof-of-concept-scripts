@@ -1,0 +1,18 @@
+!/bin/bash
+
+read -p "what would you like to name this file: " name
+read -p "what would you like to say in this file: " say
+
+export say
+
+touch $name
+chmod u+x $name
+
+{
+cat << _end_
+echo "$say"
+echo "that is what you said"
+_end_
+} >/home/mliberatore/$name
+
+./$name
