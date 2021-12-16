@@ -1,0 +1,17 @@
+!/bin/bash
+
+until [[ $job == "+" || $job == "-" || $job == "*" || $job == "/" ]]; do
+        read -p "enter a number: " n1
+        read -p "enter a another number: " n2
+        echo "enter what you would like to do add,subt,Mult,divi"
+        read -p "[+,-,*,/] : " job
+
+        if [[ $job == "+" || $job == "-" || $job == "*" || $job == "/" ]]; then
+                echo
+                An=$(( n1 $job n2 ))
+                echo "your answer is $An"
+        else
+                echo "sorry try again not a option"
+        fi
+done
+echo "math rocks"
