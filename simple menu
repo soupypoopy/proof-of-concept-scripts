@@ -1,0 +1,38 @@
+#!/bin/bash
+
+until [[ $EXIT == 0 ]]; do
+        clear
+        cat << end
+
+this is a script menu it does 3 diffrent things
+
+1.ip information
+2.list the directory
+3.avlible memorey
+
+0.exit
+
+end
+
+read -p "please select a option from above [0-3]: " EXIT
+        if [ $EXIT = 1 ]; then
+                ifconfig
+                read -p "enter to continue"
+
+        elif [ $EXIT = 2 ]; then
+                ls
+                read -p "enter to continue"
+
+        elif [ $EXIT == 3 ]; then
+                free
+                read -p "enter to continue"
+
+        elif [ $EXIT == 0 ]; then
+                echo "ok bye dont come back"
+                read -p "enter to continue"
+
+        else
+                echo "ah ah ah you didnt say the magic word"
+
+        fi
+done
