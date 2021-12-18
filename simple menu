@@ -20,7 +20,7 @@ read -p "please select a option from above [0-3]: " EXIT
                 read -p "enter to continue"
 
         elif [ $EXIT = 2 ]; then
-                ls
+                ls -ls
                 read -p "enter to continue"
 
         elif [ $EXIT == 3 ]; then
