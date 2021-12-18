@@ -1,0 +1,27 @@
+!/bin/bash
+
+clear
+select option in pizza gameboy computers tv EXIT ;do
+        clear
+        case $option in
+        pizza)
+                echo "$option is not a option";;
+
+        gameboy)
+                echo "$option is a option";;
+
+        computers)
+                echo "$option is a option";;
+
+        tv)
+                echo "$option is a option";;
+
+        EXIT)
+                break;;
+
+        *)
+                echo "not gunna happen bud";;
+        esac
+done
+
+echo "you have finished the loop"
